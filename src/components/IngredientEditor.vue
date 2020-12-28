@@ -42,12 +42,12 @@ export default {
   watch: {
     meal: function (val) {  
         this.mealKey = (val.key === undefined || val.key === '') ? "" : val.key
-        this.mealName = (val.name === undefined || val.name === '') ? "" : val.name 
+        this.mealName = (val.name === undefined || val.name === '' || val.key == 'custom') ? "" : val.name 
     },
     mealKey: function(val) {
         this.ingredients = []
-        console.log(val)
-        if(val === undefined || val === '' || val === 'custom') return;
+        if(val === undefined || val === '') return;
+        
         let ing = []
             db.collection('meals').doc(val).collection('ingredients').onSnapshot((snapshotChange) => {
             snapshotChange.forEach((doc) => {
