@@ -1,6 +1,6 @@
 <template>
     <div class="grid grid-cols-7 gap-4">
-        <input class="col-span-2 bg-blue-200 p-2 rounded"
+        <input class="col-span-4 md:col-span-2 bg-blue-200 p-2 rounded"
           type="text" name="name" v-model="nameValue" placeholder="name"
           autocomplete="off">
         <input class="col-span-2 bg-blue-200 p-2 rounded"
