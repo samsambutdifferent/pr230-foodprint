@@ -54,6 +54,10 @@ export default {
     selected(item) {
       this.$emit('meal-selected', item)
       this.search = ''
+      this.forwardPage()
+    },
+    forwardPage() {
+      this.$emit('forwardPage') 
     },
     seachMeals(val) {
       this.search = val

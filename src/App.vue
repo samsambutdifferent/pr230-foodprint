@@ -1,12 +1,19 @@
 <template>
   <HeaderComponent></HeaderComponent>
-  <div class="flex flex-col items-center">
-    <div class="relative flex flex-col items-center">
+  <div class="flex flex-col">
+    <div
+    @click="() => backPage()" 
+    class="cursor-pointer text-gray-400 my-5 pr-16 pl-16 lg:pr-32 lg:pl-32 relative">
+      <p v-if="componentIndex != 0">back</p>
+    </div>
+    <div class="relative flex flex-col items-center my-60 md:my-80">
       <transition name="slide-fade" mode="out-in">
         <component
-        class="w-screen my-60 md:my-80 pr-16 pl-16 lg:pr-32 lg:pl-32 mr-8 ml-8 relative"
-        v-bind:is=currentScreen
-        v-on:meal-selected=mealSelected></component>
+        class="w-screen pr-16 pl-16 lg:pr-32 lg:pl-32 mr-8 ml-8 relative"
+        v-bind:is=currentComponentName
+        v-on:meal-selected=mealSelected
+        v-on:forwardPage=forwardPage
+        v-on:backPage=backPage></component>
       </transition>
     </div>
   </div>
@@ -28,18 +35,38 @@ export default {
   data() {
     return {
       selectedMeal: {},
-      currentScreen: "MealSearch",
+      componentIndex: 0
+    }
+  },
+  computed: {
+    currentComponentName() {
+      switch(this.componentIndex) {
+        case 0:
+          // code block""
+          return "MealSearch"
+        case 1:
+          // code block
+          return "IngredientEditor"
+        default:
+          // code block
+          return "MealSearch"
+      }
     }
   },
   methods: {
     mealSelected(item) {
       this.selectedMeal = item
-      this.currentScreen = "IngredientEditor"
     },
+    forwardPage() {
+      this.componentIndex++
+    },
+    backPage() {
+      this.componentIndex--
+    }
   },
   provide() {
     return {
-      meal: computed(() => this.selectedMeal)
+      meal: computed(() => this.selectedMeal),
     }
   }
 }
