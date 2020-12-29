@@ -3,12 +3,10 @@
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
       <div class="flex justify-start lg:w-0 lg:flex-1">
-        <a href="#">
-          <img class="h-8 w-auto sm:h-10" src="../assets/frog-prints.png" alt="">
-        </a>
+        <img class="h-10 md:h-16 w-auto" src="../assets/frog-prints.png" alt="">
       </div>
       <div class="text-2xl font-bold text-gray-800 md:text-3xl">
-          <a href="#">Foodprint</a>
+          <p>Foodprint</p>
       </div>
       
      
