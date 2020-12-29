@@ -58,7 +58,7 @@ export default {
     filteredList() {
       let filList = []
       filList = this.meals.filter(meal => {
-        return meal.name.toLowerCase().startsWith(this.search.toLowerCase())
+        return meal.name.toLowerCase().includes(this.search.toLowerCase())
       });
       
       if(filList.length === 0) {
