@@ -1,4 +1,5 @@
 <template>
+  <HeaderComponent></HeaderComponent>
   <div class="flex flex-col items-center">
     <div class="relative flex flex-col items-center">
       <transition name="slide-fade" mode="out-in">
@@ -12,6 +13,7 @@
 </template>
 
 <script>
+import HeaderComponent from './components/HeaderComponent.vue'
 import MealSearch from './components/MealSearch.vue'
 import IngredientEditor from './components/IngredientEditor.vue'
 import { computed } from "vue";
@@ -19,6 +21,7 @@ import { computed } from "vue";
 export default {
   name: 'App',
   components: {
+    HeaderComponent,
     MealSearch,
     IngredientEditor
   },
