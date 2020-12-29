@@ -1,9 +1,9 @@
 <template>
-    <div v-if="mealKey !== ''"
+    <div
     class="w-full"> 
         <div class="w-full my-2 p-1 bg-white flex">
           <input class="w-full border-b-2 border-gray-300 bg-white h-10 px-5 pr-16 focus:outline-none"
-          type="text" name="name" v-model="mealName" placeholder="name"
+          type="text" name="name" v-model="selectedMeal.name" placeholder="name"
           autocomplete="off">
         </div>  
 
@@ -28,7 +28,7 @@ import Ingredient from './Ingredient.vue'
 
 export default {
   name: 'IngredientEditor',
-  props: ['meal'],
+  inject: ["meal"],
   components: {
       Ingredient
   },
@@ -36,31 +36,25 @@ export default {
     return {
         mealName: "",
         mealKey: "",
-        ingredients: []
+        ingredients: [],
+        selectedMeal: this.meal.value 
     }
   },
-  watch: {
-    meal: function (val) {  
-        this.mealKey = (val.key === undefined || val.key === '') ? "" : val.key
-        this.mealName = (val.name === undefined || val.name === '' || val.key == 'custom') ? "" : val.name 
-    },
-    mealKey: function(val) {
-        this.ingredients = []
-        if(val === undefined || val === '') return;
-        
-        let ing = []
-            db.collection('meals').doc(val).collection('ingredients').onSnapshot((snapshotChange) => {
-            snapshotChange.forEach((doc) => {
-                console.log(doc.data())
-                ing.push({
-                    name: doc.data().name,
-                    weight: doc.data().weight,
-                    matched: doc.data().matched
-                })  
-            });
-            this.ingredients = ing
+  mounted() {
+    this.mealName = this.meal.value.name
+    this.mealKey = this.meal.value.key
+
+    if(this.mealKey === undefined || this.mealKey === '') return;
+    this.ingredients = []
+    db.collection('meals').doc(this.mealKey).collection('ingredients').onSnapshot((snapshotChange) => {
+        snapshotChange.forEach((doc) => {
+            this.ingredients.push({
+                name: doc.data().name,
+                weight: doc.data().weight,
+                matched: doc.data().matched
+            })  
         });
-    }
+    });
   },
   methods: {
       removeRow(val) {  
