@@ -8,7 +8,7 @@
           autocomplete="off">
         <div class="col-span-2 bg-blue-200 p-2 rounded">matched: {{matched}}</div>
         <div class="col-span-1 p-2">
-            <button class="px-3 py-1 bg-red-200" @click="remove">-</button>
+            <button class="px-3 py-1 bg-red-200 rounded" @click="remove">-</button>
         </div>
     </div>
 </template>
@@ -23,7 +23,7 @@ export default {
         nameValue: this.name,
         weightValue: this.weight,
     }
-  },
+  },  
   methods: {
       remove() {
           this.$emit('remove')

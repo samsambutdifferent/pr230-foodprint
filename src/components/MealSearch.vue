@@ -1,16 +1,28 @@
 <template>
-     <div class="pt-2 text-gray-600">
-        <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-          type="search" name="search" v-model="search" placeholder="Search"
-          autocomplete="off">
-        <div class="px-5 py-2 pr-16"
-        v-if="search !== ''">
-          <p class="cursor-pointer bg-gray-200" 
-          v-for="(item, index) in filteredList" :key="index" @click="() => selected(item)">
-             {{item.name}}
-          </p>
+        <div class="w-full">
+                <div class="w-full my-2 p-1 bg-white flex">
+                  <input class="w-full border-b-2 border-gray-300 bg-white h-10 px-5 pr-16 text-sm focus:outline-none"
+                  type="search" name="search" v-model="search" placeholder="Let's find that foodprint"
+                  autocomplete="off">
+                </div>
+                <div v-if="search !== ''">
+                    <div class="shadow bg-white w-full px-5 flex"
+                    v-for="(item, index) in filteredList" :key="index" @click="() => selected(item)">
+                      
+                        <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-100">
+                            <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+                                <div class="w-full items-center flex">
+                                    <div class="">
+                                        <div class="truncate w-full normal-case font-normal -mt-1 text-gray-600">
+                                          {{item.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
-      </div>
 </template>
 
 <script>
