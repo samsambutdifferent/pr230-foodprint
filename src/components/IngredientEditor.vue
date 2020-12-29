@@ -3,7 +3,7 @@
     class="w-full"> 
         <div class="w-full my-2 p-1 bg-white flex">
           <input class="w-full border-b-2 border-gray-300 bg-white h-10 px-5 pr-16 focus:outline-none"
-          type="text" name="name" v-model="selectedMeal.name" placeholder="name"
+          type="text" name="name" v-model="mealName" placeholder="name"
           autocomplete="off">
         </div>  
 
@@ -36,15 +36,14 @@ export default {
     return {
         mealName: "",
         mealKey: "",
-        ingredients: [],
-        selectedMeal: this.meal.value 
+        ingredients: []
     }
   },
   mounted() {
-    this.mealName = this.meal.value.name
+    this.mealName = this.meal.value.name === undefined || this.meal.value.key === 'custom' ? "" : this.meal.value.name
     this.mealKey = this.meal.value.key
 
-    if(this.mealKey === undefined || this.mealKey === '') return;
+    if(this.mealKey === undefined || this.mealKey === '' || this.mealKey === 'custom') return;
     this.ingredients = []
     db.collection('meals').doc(this.mealKey).collection('ingredients').onSnapshot((snapshotChange) => {
         snapshotChange.forEach((doc) => {
