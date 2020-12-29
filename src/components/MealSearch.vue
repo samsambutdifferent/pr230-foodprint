@@ -2,7 +2,7 @@
         <div class="w-full">
                 <div class="w-full my-2 p-1 bg-white flex">
                   <input class="w-full border-b-2 border-gray-300 bg-white h-10 px-5 pr-16 text-sm focus:outline-none"
-                  type="search" name="search" v-model="search" placeholder="Let's find that foodprint"
+                  type="text" name="search" v-model="search" placeholder="Let's find that foodprint"
                   autocomplete="off">
                 </div>
                 <div v-if="search !== ''">
