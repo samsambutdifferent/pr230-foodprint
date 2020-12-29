@@ -6,7 +6,7 @@
         <input class="col-span-2 bg-blue-200 p-2 rounded"
           type="number" name="weight" v-model="weightValue" placeholder="weight (g)"
           autocomplete="off">
-        <div class="col-span-2 bg-blue-200 p-2 rounded">matched: {{matched}}</div>
+        <!-- <div class="col-span-2 bg-blue-200 p-2 rounded">{{matched}}</div> -->
         <div class="col-span-1 p-2">
             <button class="px-3 py-1 bg-red-200 rounded" @click="remove">-</button>
         </div>
