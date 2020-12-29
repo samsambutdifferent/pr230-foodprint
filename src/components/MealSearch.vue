@@ -60,14 +60,12 @@ export default {
       filList = this.meals.filter(meal => {
         return meal.name.toLowerCase().includes(this.search.toLowerCase())
       });
-      
-      if(filList.length === 0) {
-        filList.push ({
+
+      filList.push ({
           key: "custom",
           name: "Create a custom item..",
           carbonValue: 0
-        })
-      }
+      })
 
       return filList;
     }
