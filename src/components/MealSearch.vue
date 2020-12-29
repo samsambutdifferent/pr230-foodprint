@@ -2,7 +2,7 @@
         <div class="w-full">
                 <div class="w-full my-2 p-1 bg-white flex">
                   <input class="w-full border-b-2 border-gray-300 bg-white h-10 px-5 pr-16 text-sm focus:outline-none"
-                  type="text" name="search" v-model="search" placeholder="Let's find that foodprint"
+                  type="text" name="search" v-model="search" @input="seachMeals" placeholder="Let's find that foodprint"
                   autocomplete="off">
                 </div>
                 <div v-if="search !== ''">
@@ -46,17 +46,16 @@ export default {
     return {
       search: '',
       meals: [],
+      filteredList: []
     }
   },
   methods: {
     selected(item) {
       this.$emit('meal-selected', item)
       this.search = ''
-    }
-  },
-  computed: {
-    filteredList() {
-      let filList = []
+    },
+    seachMeals() {
+      let filList  = []
       filList = this.meals.filter(meal => {
         return meal.name.toLowerCase().includes(this.search.toLowerCase())
       });
@@ -67,9 +66,9 @@ export default {
           carbonValue: 0
       })
 
-      return filList;
+      this.filteredList = filList;
     }
-  }
+  },
 }
 </script>
 
