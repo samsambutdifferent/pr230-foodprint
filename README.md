@@ -11,7 +11,7 @@ yarn
 ```
 npm run serve
 OR
-yarn serve
+yarn serve --port 8080
 ```
 
 ### Compiles and minifies for production
