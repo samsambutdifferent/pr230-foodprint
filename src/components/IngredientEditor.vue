@@ -1,12 +1,25 @@
 <template>
-    <div
-    class="w-full"> 
+    <div class="w-full"> 
         <FullWInput nameProp="ingredientName" placeholderProp="name" :valueProp="mealName"
         v-on:valueChanged="mealNameUpdated"/>
         <div class="pt-2 pb-2 border-gray-300 bg-white h-auto px-5 pr-16">
-                <Ingredient class="pt-2"
-                v-for="(ingredient, index) in ingredients" :key="index" :name=ingredient.name :weight=ingredient.weight :matched=ingredient.matched 
-                v-on:remove="removeRow(ingredient)"/>
+            <div v-if="ingredients.length > 0"> 
+                <div v-for="(ingredient, index) in ingredients" :key="index" >
+                    <div class="grid grid-cols-7 gap-4 pb-2">
+                        <input class="col-span-4 md:col-span-2 bg-blue-200 p-2 rounded"
+                          type="text" name="name" v-model="ingredient.name" @change="() => matchSemantic(ingredient.name, index)" placeholder="name"
+                          autocomplete="off">
+                        <input class="col-span-2 bg-blue-200 p-2 rounded"
+                          type="number" name="weight" v-model="ingredient.weight" placeholder="weight (g)"
+                          autocomplete="off">
+                        <div class="col-span-2 bg-blue-200 p-2 rounded">{{ingredient.matched}}</div>
+                        <div class="col-span-1 p-2">
+                            <button class="px-3 py-1 bg-red-200 rounded" @click="removeRow(index)">-</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
            <div class="pt-2 justify-end">
                <button class="p-2 bg-green-200 rounded"
                @click="addIngredient">
@@ -19,21 +32,21 @@
 
 <script>
 import { db } from '../firebaseDB.js'
-import Ingredient from './Ingredient.vue'
 import FullWInput from './FullWInput.vue'
+import axios from 'axios'
 
 export default {
   name: 'IngredientEditor',
   inject: ["meal"],
   components: {
-      Ingredient,
       FullWInput
   },
   data() {
     return {
         mealName: "",
         mealKey: "",
-        ingredients: []
+        ingredients: [],
+        newIngredients: []
     }
   },
   beforeMount() {
@@ -53,8 +66,13 @@ export default {
     });
   },
   methods: {
-      removeRow(val) {  
-          this.ingredients = this.ingredients.filter(item => item !== val)
+      removeRow(index) {
+        let previousRow = this.ingredients
+        this.newIngredients = previousRow
+        
+        this.ingredients.splice(index, 1)
+        
+        console.log(previousRow)
       },
       addIngredient() {
           this.ingredients.push({
@@ -62,10 +80,23 @@ export default {
               weight: 0,
               matched: ""
           })
+          
+          this.newIngredients = this.ingredients
       },
       mealNameUpdated(val) {
           this.mealName = val
-      }
+      },
+      async matchSemantic(name, index) {
+          let mx = await axios.post(process.env.VUE_APP_SEMANTIC_MATCHER_MATCH, {name: name})
+            .then(function (response) {
+              return response.data;
+            });
+            this.ingredients.splice(index, 1, {
+              name: name,
+              weight: this.ingredients[index].weight,
+              matched: mx.matched
+            })
+      },
   }
 }
 </script>
