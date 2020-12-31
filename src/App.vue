@@ -2,9 +2,8 @@
   <HeaderComponent></HeaderComponent>
   <div class="flex flex-col">
     <div
-    @click="() => backPage()" 
     class="cursor-pointer text-gray-400 my-5 pr-16 pl-16 lg:pr-32 lg:pl-32 relative">
-      <p v-if="componentIndex != 0">back</p>
+      <a v-if="componentIndex != 0" @click="() => backPage()">back {{}}</a>
     </div>
     <div class="relative flex flex-col items-center my-60 md:my-80">
       <transition name="slide-fade" mode="out-in">
