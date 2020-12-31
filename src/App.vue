@@ -12,6 +12,7 @@
         class="w-screen pr-16 pl-16 lg:pr-32 lg:pl-32 mr-8 ml-8 relative"
         v-bind:is=currentComponentName
         v-on:meal-selected=mealSelected
+        v-on:carbonValue=carbonValueCalculated
         v-on:forwardPage=forwardPage
         v-on:backPage=backPage></component>
       </transition>
@@ -23,6 +24,7 @@
 import HeaderComponent from './components/HeaderComponent.vue'
 import MealSearch from './components/MealSearch.vue'
 import IngredientEditor from './components/IngredientEditor.vue'
+import CarbonOutput from './components/CarbonOutput.vue'
 import { computed } from "vue";
 
 export default {
@@ -30,11 +32,13 @@ export default {
   components: {
     HeaderComponent,
     MealSearch,
-    IngredientEditor
+    IngredientEditor,
+    CarbonOutput
   },
   data() {
     return {
       selectedMeal: {},
+      carbonValue: 0,
       componentIndex: 0
     }
   },
@@ -47,6 +51,9 @@ export default {
         case 1:
           // code block
           return "IngredientEditor"
+        case 2:
+          // code block
+          return "CarbonOutput"
         default:
           // code block
           return "MealSearch"
@@ -56,6 +63,9 @@ export default {
   methods: {
     mealSelected(item) {
       this.selectedMeal = item
+    },
+    carbonValueCalculated(val) {
+      this.carbonValue = val
     },
     forwardPage() {
       this.componentIndex++
@@ -67,6 +77,7 @@ export default {
   provide() {
     return {
       meal: computed(() => this.selectedMeal),
+      carbonValue: computed(() => this.carbonValue)
     }
   }
 }
