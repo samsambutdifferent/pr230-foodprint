@@ -6,19 +6,19 @@
     <div class="pl-20 grid grid-cols-1 sm:grid-cols-8 gap-2">
         <div class="">
             1 meal: <br>
-            {{co2e}} co2ekg
+            {{roundTo3decPlaces(co2e)}} co2ekg
         </div>
         <div>
             1 week: <br>
-            {{mealsPerWeek}} co2ekg
+            {{roundTo3decPlaces(co2ePerWeek)}} co2ekg
         </div>
         <div>
             1 year: <br>
-            {{mealsPerYear}} co2ekg
+            {{roundTo3decPlaces(co2ePerYear)}} co2ekg
         </div>
         <div>
             lifetime ({{avgUKLifespan}} years UK average): <br>
-            {{mealsPerLifetime}} co2ekg
+            {{roundTo3decPlaces(co2ePerLifetime)}} co2ekg
         </div>
     </div>
     </div>
@@ -37,17 +37,20 @@ export default {
     }
   },
   computed: {
-      mealsPerWeek() {
+      co2ePerWeek() {
           return this.co2e * this.timesEatenPerWeek
       },
-      mealsPerYear() {
-          return this.mealsPerWeek * 52
+      co2ePerYear() {
+          return this.co2ePerWeek * 52
       },
-      mealsPerLifetime() {
-          return this.mealsPerYear * this.avgUKLifespan
+      co2ePerLifetime() {
+          return this.co2ePerYear * this.avgUKLifespan
       },
   },
   methods: {
+      roundTo3decPlaces(val) {
+          return parseFloat(val).toFixed(3)
+      }
   }
 }
 </script>
