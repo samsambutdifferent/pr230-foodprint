@@ -3,6 +3,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      screens: {
+        'maxmd': {'max': '767px'},
+        // => @media (max-width: 767px) { ... }
+      },
       transformOrigin: {
         "0": "0%",
       },
