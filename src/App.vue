@@ -5,7 +5,7 @@
     class="cursor-pointer text-gray-400 my-5 pr-16 pl-16 lg:pr-32 lg:pl-32 relative">
       <a v-if="currentComponentName != 'MealSearch'" @click="() => backPage()">back</a>
     </div>
-    <div class="relative flex flex-col items-center my-60 md:my-80">
+    <div class="relative flex flex-col items-center my-40 md:my-60">
       <transition name="slide-fade" mode="out-in">
         <component
         class="w-screen pr-16 pl-16 lg:pr-32 lg:pl-32 mr-8 ml-8 relative"
