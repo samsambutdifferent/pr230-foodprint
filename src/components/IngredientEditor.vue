@@ -3,24 +3,62 @@
         <FullWInput nameProp="ingredientName" placeholderProp="name" :valueProp="mealName"
         v-on:valueChanged="mealNameUpdated"/>
         <div class="pt-2 pb-2 border-gray-300 bg-white h-auto px-5 pr-16">
-            <div v-if="ingredients.length > 0"> 
-                <div v-for="(ingredient, index) in ingredients" :key="index" >
+
+            <div v-if="ingredients.length == 0" class="pb-10">
+                Click <span class="p-1 bg-green-200 rounded">+</span> to add an ingredient
+            </div>
+            <div v-else>
+
+                <!-- medium / large screen -->
+                <div class="maxmd:hidden">
                     <div class="grid grid-cols-7 gap-4 pb-2">
-                        <input class="col-span-4 md:col-span-2 bg-blue-200 p-2 rounded"
-                          type="text" name="name" v-model="ingredient.name" @change="() => matchSemantic(ingredient.name, index)" placeholder="name"
-                          autocomplete="off">
-                        <input class="col-span-2 bg-blue-200 p-2 rounded"
-                          type="number" name="weight" v-model="ingredient.weight" placeholder="weight (g)"
-                          autocomplete="off">
-                        <div class="col-span-2 bg-blue-200 p-2 rounded">{{ingredient.matched}}</div>
-                        <div class="col-span-1 p-2">
+                        <div class="col-span-4 md:col-span-2 p-2 rounded">
+                            ingredient name
+                        </div>
+                        <div class="col-span-4 md:col-span-2 p-2 rounded">
+                            weight (g)
+                        </div>
+                    </div>
+                
+                    <div v-for="(ingredient, index) in ingredients" :key="index" >
+                        <div class="grid grid-cols-7 gap-4 pb-2">
+                            <input class="col-span-2 bg-blue-200 p-2 rounded"
+                              type="text" name="name" v-model="ingredient.name" @change="() => matchSemantic(ingredient.name, index)" placeholder="name"
+                              autocomplete="off">
+                            <input class="col-span-2 bg-blue-200 p-2 rounded"
+                              type="number" name="weight" v-model="ingredient.weight" placeholder="weight (g)"
+                              autocomplete="off">
+                            <div class="col-span-2 bg-blue-200 p-2 rounded">{{ingredient.matched}}</div>
+                            <div class="col-span-1 p-2">
+                                <button class="px-3 py-1 bg-red-200 rounded" @click="removeRow(index)">-</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- small / xsmall screen -->
+                <div class="md:hidden">
+                    <div v-for="(ingredient, index) in ingredients" :key="index" 
+                    class="pb-4">   
+                        <div class="grid grid-cols-1 pb-2">
+                                <input class="bg-blue-200 p-2 rounded"
+                                type="text" name="name" v-model="ingredient.name" @change="() => matchSemantic(ingredient.name, index)" placeholder="name"
+                                autocomplete="off">
+                        </div>
+                        <div class="grid grid-cols-1 pb-2">
+                                <input class="bg-blue-200 p-2 rounded"
+                                type="text" name="weight" v-model="ingredient.weight" placeholder="weight (g)"
+                                autocomplete="off">
+                        </div>
+                        <div class="grid grid-cols-1 pb-2">
                             <button class="px-3 py-1 bg-red-200 rounded" @click="removeRow(index)">-</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="pt-2 grid grid-cols-8 gap-1">
+
+            <div class="pt-2 grid md:grid-cols-8 gap-1">
                 <div class="col-start-1">
                     <button
                     @click="() => calculateCarbon()"
@@ -37,7 +75,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -50,7 +87,7 @@ export default {
   name: 'IngredientEditor',
   inject: ["meal"],
   components: {
-      FullWInput
+      FullWInput,
   },
   data() {
     return {
