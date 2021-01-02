@@ -1,5 +1,4 @@
 <template>
-
     <div class="w-full"> 
         <FullWInput nameProp="ingredientName" placeholderProp="name" :valueProp="mealName"
         v-on:valueChanged="mealNameUpdated"/>
