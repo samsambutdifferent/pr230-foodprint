@@ -3,7 +3,7 @@
   <div class="flex flex-col">
     <div
     class="cursor-pointer text-gray-400 my-5 pr-16 pl-16 lg:pr-32 lg:pl-32 relative">
-      <a v-if="componentIndex != 0" @click="() => backPage()">back {{}}</a>
+      <a v-if="currentComponentName != 'MealSearch'" @click="() => backPage()">back</a>
     </div>
     <div class="relative flex flex-col items-center my-60 md:my-80">
       <transition name="slide-fade" mode="out-in">
@@ -12,8 +12,8 @@
         v-bind:is=currentComponentName
         v-on:meal-selected=mealSelected
         v-on:carbonValue=carbonValueCalculated
-        v-on:forwardPage=forwardPage
-        v-on:backPage=backPage></component>
+        v-on:changePage=changePage
+        ></component>
       </transition>
     </div>
   </div>
@@ -38,25 +38,7 @@ export default {
     return {
       selectedMeal: {},
       carbonValue: 0,
-      componentIndex: 0
-    }
-  },
-  computed: {
-    currentComponentName() {
-      switch(this.componentIndex) {
-        case 0:
-          // code block""
-          return "MealSearch"
-        case 1:
-          // code block
-          return "IngredientEditor"
-        case 2:
-          // code block
-          return "CarbonOutput"
-        default:
-          // code block
-          return "MealSearch"
-      }
+      currentComponentName: "MealSearch"
     }
   },
   methods: {
@@ -66,11 +48,23 @@ export default {
     carbonValueCalculated(val) {
       this.carbonValue = val
     },
-    forwardPage() {
-      this.componentIndex++
+    changePage(val) {
+      this.currentComponentName = val
     },
     backPage() {
-      this.componentIndex--
+      switch(this.currentComponentName) {
+        case "IngredientEditor":
+          this.changePage("MealSearch")
+          break
+        case "CarbonOutput":
+          // code block
+          this.changePage("IngredientEditor")
+          break
+        default:
+          // code block
+          this.changePage("MealSearch")
+          break
+      }
     }
   },
   provide() {

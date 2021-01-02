@@ -1,4 +1,5 @@
 <template>
+
     <div class="w-full"> 
         <FullWInput nameProp="ingredientName" placeholderProp="name" :valueProp="mealName"
         v-on:valueChanged="mealNameUpdated"/>
@@ -129,7 +130,7 @@ export default {
         });
 
         this.$emit('carbonValue', val)
-        this.$emit('forwardPage')
+        this.$emit('changePage', 'CarbonOutput')
       },
   }
 }

@@ -1,6 +1,7 @@
 <template>
         <div class="w-full">
-          <FullWInput nameProp="searchMeals" placeholderProp="Let's find that footprint" :valueProp="search"
+          <FullWInput
+          nameProp="searchMeals" placeholderProp="Let's find that footprint" :valueProp="search"
           v-on:valueChanged="seachMeals"/>
           <div v-if="search !== ''">
               <div class="shadow bg-white w-full px-5 flex"
@@ -10,9 +11,9 @@
                       <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                           <div class="w-full items-center flex">
                               <div class="">
-                                  <div class="truncate w-full normal-case font-normal -mt-1 text-gray-600">
+                                  <a class="truncate w-full normal-case font-normal -mt-1 text-gray-600">
                                     {{item.name}}
-                                  </div>
+                                  </a>
                               </div>
                           </div>
                       </div>
@@ -48,16 +49,16 @@ export default {
       search: '',
       meals: [],
       filteredList: []
-    }
+    }  
   },
   methods: {
     selected(item) {
       this.$emit('meal-selected', item)
       this.search = ''
-      this.forwardPage()
+      this.changePage()
     },
-    forwardPage() {
-      this.$emit('forwardPage') 
+    changePage() {
+      this.$emit('changePage', 'IngredientEditor') 
     },
     seachMeals(val) {
       this.search = val
