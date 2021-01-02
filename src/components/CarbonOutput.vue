@@ -1,26 +1,31 @@
 <template>
     <div>
-    <div class="w-full pl-20 pb-10">
-        Assuming you eat this meal <input class="w-8 bg-gray-200" type="number" v-model=timesEatenPerWeek> times per week
-    </div>
-    <div class="pl-20 grid grid-cols-1 sm:grid-cols-8 gap-2">
-        <div class="">
-            1 meal: <br>
-            {{roundTo3decPlaces(co2e)}} co2ekg
-        </div>
-        <div>
-            1 week: <br>
-            {{roundTo3decPlaces(co2ePerWeek)}} co2ekg
-        </div>
-        <div>
-            1 year: <br>
-            {{roundTo3decPlaces(co2ePerYear)}} co2ekg
-        </div>
-        <div>
-            lifetime ({{avgUKLifespan}} years UK average): <br>
-            {{roundTo3decPlaces(co2ePerLifetime)}} co2ekg
-        </div>
-    </div>
+        <div class="w-full pl-20 pb-10">
+
+            <div class="pb-2">
+                co2ekg of meal:
+                <span class="font-bold">{{roundTo3decPlaces(co2e)}}</span>
+            </div>
+
+            <div class="pb-2">
+                Assuming you eat this meal <input class="w-8 bg-gray-200" type="number" v-model=timesEatenPerWeek> times per week
+            </div>
+
+            </div>
+            <div class="pl-20 grid grid-cols-1 sm:grid-cols-8 gap-2">
+                <div>
+                    1 week: <br>
+                    <span class="font-bold">{{roundTo3decPlaces(co2ePerWeek)}}</span> co2ekg
+                </div>
+                <div>
+                    1 year: <br>
+                    <span class="font-bold">{{roundTo3decPlaces(co2ePerYear)}}</span> co2ekg
+                </div>
+                <div>
+                    lifetime ({{avgUKLifespan}} years UK average): <br>
+                     <span class="font-bold">{{roundTo3decPlaces(co2ePerLifetime)}}</span> co2ekg
+                </div>
+            </div>
     </div>
 </template>
 
