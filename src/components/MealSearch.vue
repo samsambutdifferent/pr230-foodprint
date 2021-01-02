@@ -1,7 +1,7 @@
 <template>
         <div class="w-full">
           <FullWInput
-          nameProp="searchMeals" placeholderProp="Let's find that footprint" :valueProp="search"
+          nameProp="searchMeals" placeholderProp="Enter the name of your meal.." :valueProp="search"
           v-on:valueChanged="seachMeals"/>
           <div v-if="search !== ''">
               <div class="shadow bg-white w-full px-5 flex"
@@ -30,7 +30,7 @@ import FullWInput from './FullWInput.vue'
 export default {
   name: 'MealSearch',
   components: {
-    FullWInput
+    FullWInput,
   },
   mounted() {
     db.collection('meals').onSnapshot((snapshotChange) => {
