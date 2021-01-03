@@ -53,7 +53,27 @@ export default {
   },
   methods: {
     selected(item) {
-      this.$emit('meal-selected', item)
+      let meal = item
+      let ingredients = []
+
+      if(meal.key != 'custom' || meal.key != undefined) {
+        db.collection('meals').doc(item.key).collection('ingredients').onSnapshot((snapshotChange) => {
+          snapshotChange.forEach((doc) => {
+              ingredients.push({
+                  name: doc.data().name,
+                  weight: doc.data().weight,
+                  matched: doc.data().matched
+              })
+          });
+        });
+        this.$emit('mealSelected', meal)
+        this.$emit('ingredientsSelected', ingredients)
+      }
+      else {
+        this.$emit('mealSelected', meal)
+        this.$emit('ingredientsSelected', ingredients)
+      }
+
       this.search = ''
       this.changePage()
     },

@@ -10,7 +10,8 @@
         <component
         class="w-screen pr-16 pl-16 lg:pr-32 lg:pl-32 mr-8 ml-8 relative"
         v-bind:is=currentComponentName
-        v-on:meal-selected=mealSelected
+        v-on:mealSelected=mealSelected
+        v-on:ingredientsSelected=ingredientsSelected
         v-on:carbonValue=carbonValueCalculated
         v-on:changePage=changePage
         ></component>
@@ -37,6 +38,7 @@ export default {
   data() {
     return {
       selectedMeal: {},
+      selectedIngredients: [],
       carbonValue: 0,
       currentComponentName: "MealSearch"
     }
@@ -44,6 +46,9 @@ export default {
   methods: {
     mealSelected(item) {
       this.selectedMeal = item
+    },
+    ingredientsSelected(ingredients) {
+      this.selectedIngredients = ingredients
     },
     carbonValueCalculated(val) {
       this.carbonValue = val
@@ -69,8 +74,9 @@ export default {
   },
   provide() {
     return {
-      meal: computed(() => this.selectedMeal),
-      carbonValue: computed(() => this.carbonValue)
+      mealInject: computed(() => this.selectedMeal),
+      ingredientsInject: computed(() => this.selectedIngredients),
+      carbonValueInject: computed(() => this.carbonValue)
     }
   }
 }

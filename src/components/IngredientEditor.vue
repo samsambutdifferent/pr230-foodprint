@@ -3,7 +3,6 @@
         <FullWInput nameProp="ingredientName" placeholderProp="name" :valueProp="mealName"
         v-on:valueChanged="mealNameUpdated"/>
         <div class="pt-2 pb-2 border-gray-300 bg-white h-auto px-5 pr-16">
-
             <div v-if="ingredients.length == 0" class="pb-10">
                 Click<button class="p-1 ml-1 mr-1 bg-green-200 rounded" @click="addIngredient">+</button>to add an ingredient
             </div>
@@ -79,13 +78,12 @@
 </template>
 
 <script>
-import { db } from '../firebaseDB.js'
 import FullWInput from './FullWInput.vue'
 import axios from 'axios'
 
 export default {
   name: 'IngredientEditor',
-  inject: ["meal"],
+  inject: ["mealInject", "ingredientsInject"],
   components: {
       FullWInput,
   },
@@ -97,21 +95,10 @@ export default {
         newIngredients: []
     }
   },
-  beforeMount() {
-    this.mealName = this.meal.value.name === undefined || this.meal.value.key === 'custom' ? "" : this.meal.value.name
-    this.mealKey = this.meal.value.key
-
-    if(this.mealKey === undefined || this.mealKey === '' || this.mealKey === 'custom') return;
-    this.ingredients = []
-    db.collection('meals').doc(this.mealKey).collection('ingredients').onSnapshot((snapshotChange) => {
-        snapshotChange.forEach((doc) => {
-            this.ingredients.push({
-                name: doc.data().name,
-                weight: doc.data().weight,
-                matched: doc.data().matched
-            })  
-        });
-    });
+  created() {
+    this.mealName = this.mealInject.value.name === undefined || this.mealInject.value.key === 'custom' ? "" : this.mealInject.value.name
+    this.mealKey = this.mealInject.value.key
+    this.ingredients = this.ingredientsInject.value
   },
   computed: {
       awaitingSemanticMatch() {
