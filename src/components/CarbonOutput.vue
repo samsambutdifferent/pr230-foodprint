@@ -6,7 +6,7 @@
                 <span class="font-bold text-xl">{{roundTo3decPlaces(co2e)}}</span> kg CO<sub>2</sub>e 
                 <div class="col-span-1" v-if="equivalencies .filter(x => x.key === 'smartphone_average_day').length > 0">
                         <Equivalent
-                        :co2eProp=co2ePerYear
+                        :co2eProp=co2e
                         :equivalentProp="equivalencies.filter(x => x.key === 'smartphone_average_day')[0]"
                         />
                 </div>
@@ -35,10 +35,10 @@
                         <p>1 year:</p>
                         <span class="font-bold text-xl">{{roundTo3decPlaces(co2ePerYear)}}</span> kg CO<sub>2</sub>e 
                     </div>
-                    <div class="col-span-1" v-if="equivalencies .filter(x => x.key === '1_litre_petrol').length > 0">
+                    <div class="col-span-1" v-if="equivalencies .filter(x => x.key === 'driving_1_mile_average_36_milespergallon').length > 0">
                         <Equivalent
                         :co2eProp=co2ePerYear
-                        :equivalentProp="equivalencies.filter(x => x.key === '1_litre_petrol')[0]"
+                        :equivalentProp="equivalencies.filter(x => x.key === 'driving_1_mile_average_36_milespergallon')[0]"
                         />
                     </div>
                 </div>
