@@ -67,7 +67,7 @@ import roundTo3decPlaces from '../mixins/helper'
 
 export default {
   name: 'CarbonOutput',
-  inject: ['carbonValue'],  
+  inject: ['carbonValueInject'],  
   mixins: [roundTo3decPlaces],
   components: {
       Equivalent
@@ -87,7 +87,7 @@ export default {
   },
   data() {
     return {
-        co2e: this.carbonValue,
+        co2e: this.carbonValueInject,
         timesEatenPerWeek: 2,
         avgUKLifespan: 79.4,
         equivalencies: []
