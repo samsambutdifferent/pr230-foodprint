@@ -5,7 +5,7 @@
         <div class="pt-2 pb-2 border-gray-300 bg-white h-auto px-5 pr-16">
 
             <div v-if="ingredients.length == 0" class="pb-10">
-                Click <span class="p-1 bg-green-200 rounded">+</span> to add an ingredient
+                Click<button class="p-1 ml-1 mr-1 bg-green-200 rounded" @click="addIngredient">+</button>to add an ingredient
             </div>
             <div v-else>
 
