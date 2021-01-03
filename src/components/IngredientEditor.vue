@@ -133,6 +133,12 @@ export default {
           this.mealName = val
       },
       async matchSemantic(name, index) {
+            this.ingredients.splice(index, 1, {
+              name: name,
+              weight: this.ingredients[index].weight,
+              matched: ""
+            })
+
           let mx = await axios.post(process.env.VUE_APP_SEMANTIC_MATCHER_MATCH, {name: name})
             .then(function (response) {
               return response.data;
