@@ -6,7 +6,6 @@
           <div v-if="search !== ''">
               <div class="shadow bg-white w-full px-5 flex"
               v-for="(item, index) in filteredList" :key="index" @click="() => selected(item)">
-                
                   <div class="cursor-pointer w-full border-gray-100 border-b hover:bg-teal-100">
                       <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
                           <div class="w-full items-center flex">
@@ -78,7 +77,7 @@ export default {
       this.changePage()
     },
     changePage() {
-      this.$emit('changePage', 'IngredientEditor') 
+      this.$emit('changePage', 'MealOutput') 
     },
     seachMeals(val) {
       this.search = val
