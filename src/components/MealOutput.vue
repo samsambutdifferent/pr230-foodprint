@@ -7,7 +7,6 @@
         <CarbonOutput
         v-if="carbonValue!=0"
         />
-carbonValue
     </div>
 </template>
 
