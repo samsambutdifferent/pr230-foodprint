@@ -1,6 +1,6 @@
 <template>
   <HeaderComponent></HeaderComponent>
-  <div class="flex flex-col">
+    <div class="flex flex-col">
     <div
     class="cursor-pointer text-gray-400 my-5 pr-16 pl-16 lg:pr-32 lg:pl-32 relative">
       <a v-if="currentComponentName != 'MealSearch'" @click="() => backPage()">back</a>
@@ -12,7 +12,6 @@
         v-bind:is=currentComponentName
         v-on:mealSelected=mealSelected
         v-on:ingredientsSelected=ingredientsSelected
-        v-on:carbonValue=carbonValueCalculated
         v-on:changePage=changePage
         ></component>
       </transition>
@@ -23,8 +22,7 @@
 <script>
 import HeaderComponent from './components/HeaderComponent.vue'
 import MealSearch from './components/MealSearch.vue'
-import IngredientEditor from './components/IngredientEditor.vue'
-import CarbonOutput from './components/CarbonOutput.vue'
+import MealOutput from './components/MealOutput.vue'
 import { computed } from "vue";
 
 export default {
@@ -32,14 +30,12 @@ export default {
   components: {
     HeaderComponent,
     MealSearch,
-    IngredientEditor,
-    CarbonOutput
+    MealOutput
   },
   data() {
     return {
       selectedMeal: {},
       selectedIngredients: [],
-      carbonValue: 0,
       currentComponentName: "MealSearch"
     }
   },
@@ -50,20 +46,13 @@ export default {
     ingredientsSelected(ingredients) {
       this.selectedIngredients = ingredients
     },
-    carbonValueCalculated(val) {
-      this.carbonValue = val
-    },
     changePage(val) {
       this.currentComponentName = val
     },
     backPage() {
       switch(this.currentComponentName) {
-        case "IngredientEditor":
+        case "MealOutput":
           this.changePage("MealSearch")
-          break
-        case "CarbonOutput":
-          // code block
-          this.changePage("IngredientEditor")
           break
         default:
           // code block
@@ -75,8 +64,7 @@ export default {
   provide() {
     return {
       mealInject: computed(() => this.selectedMeal),
-      ingredientsInject: computed(() => this.selectedIngredients),
-      carbonValueInject: computed(() => this.carbonValue)
+      ingredientsInject: computed(() => this.selectedIngredients)
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="w-full pl-20 pb-10">
+        <div class="w-full pt-20">
 
             <div class="pb-2 bg-gradient-to-r from-green-400 to-white">
                 <span class="font-bold text-xl">{{roundTo3decPlaces(co2e)}}</span> kg CO<sub>2</sub>e 
