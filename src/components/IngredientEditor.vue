@@ -63,7 +63,7 @@
                     @click="() => calculateCarbon()"
                     class="w-full p-2 bg-purple-200 rounded disabled:opacity-50"
                     :disabled=awaitingSemanticMatch >
-                        calculate C02e
+                        calculate CO<sub>2</sub>e
                     </button>
                 </div>
                 <div class="col-end-9">
