@@ -83,7 +83,7 @@ export default {
       this.search = val
       let filList  = []
       filList = this.meals.filter(meal => {
-        return meal.name.toLowerCase().includes(this.search.toLowerCase())
+        return meal.name.toLowerCase().startsWith(this.search.toLowerCase())
       });
 
       filList.push ({
