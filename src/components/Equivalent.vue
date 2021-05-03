@@ -13,13 +13,12 @@ export default {
   props: ['co2eProp', 'equivalentProp'],
   data() {
     return {
-        co2e: this.co2eProp,
         equivalent: this.equivalentProp
     }
   },
   computed: {
       equivalentValue() {
-          return this.co2e / this.equivalentProp['value'] 
+          return this.co2eProp / this.equivalentProp['value'] 
       },
       units() {
           return this.equivalent['unit']
