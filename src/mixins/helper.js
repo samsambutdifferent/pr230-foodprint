@@ -1,7 +1,12 @@
 export default {
     methods: {
         rounding(val) {
-          return Math.round(val)
+          if(Math.round(val) > 0){
+            return Math.round(val)
+          }
+          else {
+            return parseFloat(val.toFixed(2))
+          }
         },
         roundTo3decPlaces(val) {
           return parseFloat(val.toFixed(3))
