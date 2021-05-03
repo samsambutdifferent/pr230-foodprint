@@ -12,7 +12,7 @@
             </div>
 
             <div class="pt-6">
-                Assuming you eat this meal <input class="w-8 bg-gray-200" type="number" v-model=timesEatenPerWeek> times per week
+                Assuming you eat this meal <input class="w-8 bg-gray-200" type="number" v-model=timesEatenPerWeek min="0"> times per week
             </div>
 
             </div>
