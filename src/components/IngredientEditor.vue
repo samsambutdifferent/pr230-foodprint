@@ -158,7 +158,9 @@ export default {
             return response.data;
         });
 
-        this.$emit('carbonValue', val)
+        let set_to_grams = val / 1000
+
+        this.$emit('carbonValue', set_to_grams)
         this.$emit('changePage', 'CarbonOutput')
       },
   }
