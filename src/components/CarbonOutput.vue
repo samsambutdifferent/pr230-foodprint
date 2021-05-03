@@ -22,10 +22,10 @@
                         <p>1 week:</p>
                         <span class="font-bold text-xl">{{numberWithCommas(roundTo2decPlaces(co2ePerWeek))}}</span> kg CO<sub>2</sub>e 
                     </div>
-                    <div class="col-span-1" v-if="equivalencies.filter(x => x.key === 'bath_hot_gas_boiler').length > 0">
+                    <div class="col-span-1" v-if="equivalencies.filter(x => x.key === 'light_15_watt').length > 0">
                         <Equivalent
                         :co2eProp=co2ePerWeek
-                        :equivalentProp="equivalencies.filter(x => x.key === 'bath_hot_gas_boiler')[0]"
+                        :equivalentProp="equivalencies.filter(x => x.key === 'light_15_watt')[0]"
                         />
                     </div>
                 </div>
@@ -76,6 +76,7 @@ export default {
     db.collection('equivalency_conversion_factors').onSnapshot((snapshotChange) => {
       this.equivalencies= [];
       snapshotChange.forEach((doc) => { 
+        console.log(doc.data())
         this.equivalencies.push({
           key: doc.id,
           type: doc.data().type,
