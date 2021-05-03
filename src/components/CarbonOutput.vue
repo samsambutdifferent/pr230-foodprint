@@ -2,7 +2,7 @@
     <div>
         <div class="w-full pt-20 ml-8">
             <div class="pb-2 bg-gradient-to-r from-green-400 to-white">
-                <span class="font-bold text-xl">{{roundTo3decPlaces(co2e)}}</span> kg CO<sub>2</sub>e 
+                <span class="font-bold text-xl">{{numberWithCommas(roundTo3decPlaces(co2e))}}</span> kg CO<sub>2</sub>e 
                 <div class="col-span-1" v-if="equivalencies .filter(x => x.key === 'smartphone_average_day').length > 0">
                         <Equivalent
                         :co2eProp=co2e
@@ -20,7 +20,7 @@
                 <div class="grid-cols-1 ">
                     <div class="col-span-1">
                         <p>1 week:</p>
-                        <span class="font-bold text-xl">{{roundTo3decPlaces(co2ePerWeek)}}</span> kg CO<sub>2</sub>e 
+                        <span class="font-bold text-xl">{{numberWithCommas(roundTo3decPlaces(co2ePerWeek))}}</span> kg CO<sub>2</sub>e 
                     </div>
                     <div class="col-span-1" v-if="equivalencies.filter(x => x.key === 'bath_hot_gas_boiler').length > 0">
                         <Equivalent
@@ -32,7 +32,7 @@
                 <div class="grid-cols-1 ">
                     <div class="col-span-1">
                         <p>1 year:</p>
-                        <span class="font-bold text-xl">{{roundTo3decPlaces(co2ePerYear)}}</span> kg CO<sub>2</sub>e 
+                        <span class="font-bold text-xl">{{numberWithCommas(roundTo3decPlaces(co2ePerYear))}}</span> kg CO<sub>2</sub>e 
                     </div>
                     <div class="col-span-1" v-if="equivalencies .filter(x => x.key === 'driving_1_mile_average_36_milespergallon').length > 0">
                         <Equivalent
@@ -45,7 +45,7 @@
                     <div class="grid-cols-1 ">
                         <div class="col-span-1">
                             <p>lifetime ({{avgUKLifespan}} years UK average): </p>
-                            <span class="font-bold text-xl">{{roundTo3decPlaces(co2ePerLifetime)}}</span> kg CO<sub>2</sub>e 
+                            <span class="font-bold text-xl">{{numberWithCommas(roundTo3decPlaces(co2ePerLifetime))}}</span> kg CO<sub>2</sub>e 
                         </div>
                         <div class="col-span-1" v-if="equivalencies .filter(x => x.key === 'london_to_glasgow_in_car').length > 0">
                             <Equivalent
@@ -63,11 +63,12 @@
 import { db } from '../firebaseDB.js';
 import Equivalent from './Equivalent.vue'
 import roundTo3decPlaces from '../mixins/helper'
+import numberWithCommas from '@/mixins/helper'
 
 export default {
   name: 'CarbonOutput',
   inject: ['carbonValueInject'],  
-  mixins: [roundTo3decPlaces],
+  mixins: [roundTo3decPlaces, numberWithCommas],
   components: {
       Equivalent
   },
