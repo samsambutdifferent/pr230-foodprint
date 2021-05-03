@@ -1,16 +1,16 @@
 <template>
     <div v-if="equivalent !== {}">
-        is equal to: {{numberWithCommas(roundTo3decPlaces(equivalentValue))}} {{units}}        
+        is equal to: {{numberWithCommas(rounding(equivalentValue))}} {{units}}        
     </div>
 </template>
 
 <script>
-import roundTo3decPlaces from '@/mixins/helper'
+import rounding from '@/mixins/helper'
 import numberWithCommas from '@/mixins/helper'
 
 export default {
   name: 'CarbonOutput',
-  mixins: [roundTo3decPlaces, numberWithCommas],
+  mixins: [rounding, numberWithCommas],
   props: ['co2eProp', 'equivalentProp'],
   data() {
     return {
