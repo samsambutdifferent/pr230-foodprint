@@ -76,7 +76,6 @@ export default {
     db.collection('equivalency_conversion_factors').onSnapshot((snapshotChange) => {
       this.equivalencies= [];
       snapshotChange.forEach((doc) => { 
-        console.log(doc.data())
         this.equivalencies.push({
           key: doc.id,
           type: doc.data().type,
