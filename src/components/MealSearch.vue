@@ -73,6 +73,7 @@ export default {
         this.$emit('ingredientsSelected', ingredients)
       }
 
+      this.$emit('searchInput', this.search)
       this.search = ''
       this.changePage()
     },

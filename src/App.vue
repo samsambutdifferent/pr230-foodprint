@@ -13,6 +13,7 @@
         v-on:mealSelected=mealSelected
         v-on:ingredientsSelected=ingredientsSelected
         v-on:changePage=changePage
+        v-on:searchInput=searchInput
         ></component>
       </transition>
     </div>
@@ -36,7 +37,8 @@ export default {
     return {
       selectedMeal: {},
       selectedIngredients: [],
-      currentComponentName: "MealSearch"
+      currentComponentName: "MealSearch",
+      customSearch: ""
     }
   },
   methods: {
@@ -48,6 +50,9 @@ export default {
     },
     changePage(val) {
       this.currentComponentName = val
+    },
+    searchInput(val) {
+      this.customSearch = val
     },
     backPage() {
       switch(this.currentComponentName) {
@@ -64,7 +69,8 @@ export default {
   provide() {
     return {
       mealInject: computed(() => this.selectedMeal),
-      ingredientsInject: computed(() => this.selectedIngredients)
+      ingredientsInject: computed(() => this.selectedIngredients),
+      customSearchInject: computed(() => this.customSearch)
     }
   }
 }

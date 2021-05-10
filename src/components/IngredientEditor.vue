@@ -85,7 +85,7 @@ import axios from 'axios'
 
 export default {
   name: 'IngredientEditor',
-  inject: ["mealInject", "ingredientsInject"],
+  inject: ["mealInject", "ingredientsInject", "customSearchInject"],
   components: {
       FullWInput,
   },
@@ -95,12 +95,12 @@ export default {
         mealKey: "",
         ingredients: [],
         newIngredients: [],
-        loadingResults: this.loadingResultsInject,
+        loadingResults: false,
         valueHasChanged: true
     }
   },
   created() {
-    this.mealName = this.mealInject.value.name === undefined || this.mealInject.value.key === 'custom' ? "" : this.mealInject.value.name
+    this.mealName = this.mealInject.value.name === undefined || this.mealInject.value.key === 'custom' ? this.customSearchInject : this.mealInject.value.name
     this.mealKey = this.mealInject.value.key
     this.ingredients = this.ingredientsInject.value
   },
