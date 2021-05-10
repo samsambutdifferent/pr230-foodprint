@@ -25,6 +25,7 @@
                               type="text" name="name" v-model="ingredient.name" @change="() => matchSemantic(ingredient.name, index)" placeholder="name"
                               autocomplete="off">
                             <input class="col-span-2 bg-blue-200 p-2 rounded"
+                              @change="valuesChanged()"
                               type="number" name="weight" v-model="ingredient.weight" placeholder="weight (g)"
                               autocomplete="off">
                             <div class="col-span-2 bg-blue-200 p-2 rounded">{{ingredient.matched}}</div>
@@ -46,6 +47,7 @@
                         </div>
                         <div class="grid grid-cols-1 pb-2">
                                 <input class="bg-blue-200 p-2 rounded"
+                                @change="valuesChanged()"
                                 type="text" name="weight" v-model="ingredient.weight" placeholder="weight (g)"
                                 autocomplete="off">
                         </div>
@@ -62,7 +64,7 @@
                     <button
                     @click="() => calculateCarbon()"
                     class="w-full p-2 bg-purple-200 rounded disabled:opacity-50"
-                    :disabled=awaitingSemanticMatch >
+                    :disabled="awaitingSemanticMatch || !valueHasChanged" >
                         calculate CO<sub>2</sub>e
                     </button>
                 </div>
@@ -92,7 +94,9 @@ export default {
         mealName: "",
         mealKey: "",
         ingredients: [],
-        newIngredients: []
+        newIngredients: [],
+        loadingResults: this.loadingResultsInject,
+        valueHasChanged: true
     }
   },
   created() {
@@ -120,6 +124,9 @@ export default {
         
         this.ingredients.splice(index, 1)
       },
+      valuesChanged() {
+        this.valueHasChanged = true
+      },
       addIngredient() {
           this.ingredients.push({
               name: "",
@@ -133,6 +140,8 @@ export default {
           this.mealName = val
       },
       async matchSemantic(name, index) {
+            this.valuesChanged()
+
             this.ingredients.splice(index, 1, {
               name: name,
               weight: this.ingredients[index].weight,
@@ -150,6 +159,11 @@ export default {
             })
       },
       async calculateCarbon() {
+        this.valueHasChanged = false
+        
+        this.loadingResults = true
+        this.$emit('loadingResults')
+        this.$emit('carbonValue', 0)
 
         let param = this.ingredients.map(x => { return({'name': x.matched, 'weight': x.weight}) })
 
@@ -162,6 +176,8 @@ export default {
 
         this.$emit('carbonValue', set_to_grams)
         this.$emit('changePage', 'CarbonOutput')
+        this.loadingResults = false
+        this.$emit('loadingResults')
       },
   }
 }
