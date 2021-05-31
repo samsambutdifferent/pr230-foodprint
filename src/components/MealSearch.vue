@@ -3,7 +3,7 @@
 
         <div class="text-gray-800 relative pb-10">
           <p>
-          The most accurate way to find out how sustainable your meal is in 3 easy steps. Find out more about us here <a class="cursor-pointer bg-gray-200" @click="() => goToAboutPage()">About</a>
+          The most accurate way to find out how sustainable your meal is in 2 easy steps. Find out more about us <a class="cursor-pointer bg-gray-200" @click="() => goToAboutPage()">here</a>
           </p>
 
           <StepBox title="Step 1:" text="Enter the name of your meal below:"/>
