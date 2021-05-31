@@ -58,15 +58,22 @@
                 </div>
             </div>
 
-
             <div class="pt-2 grid md:grid-cols-8 gap-1">
                 <div class="col-start-1">
+                    <div class="w-full p-2"
+                    @mouseover="hover = true" @mouseleave="hover = false"  :class="{ active: hover }">
                     <button
+
                     @click="() => calculateCarbon()"
-                    class="w-full p-2 bg-purple-200 rounded disabled:opacity-50"
+                    class="bg-purple-200 rounded disabled:opacity-50"
                     :disabled="awaitingSemanticMatch || !valueHasChanged" >
                         calculate CO<sub>2</sub>e
                     </button>
+
+                    </div>
+                    <div v-if="hover != ''" style="color: red">
+                        {{hoverContent}}
+                    </div>
                 </div>
                 <div class="col-end-9">
                     <button class="p-2 bg-green-200 rounded"
@@ -96,7 +103,8 @@ export default {
         ingredients: [],
         newIngredients: [],
         loadingResults: false,
-        valueHasChanged: true
+        valueHasChanged: true,
+        hover: false
     }
   },
   created() {
@@ -115,6 +123,16 @@ export default {
                 return false;
             }
         })
+      },
+      ingredientsWeightIsZero() {
+          return this.ingredients.some(x => x.weight == 0)
+      },
+      hoverContent() {
+          if (this.ingredientsWeightIsZero) {
+              return "Weight values cannot be 0"
+          } else {
+              return ""
+          }
       }
   },
   methods: {
