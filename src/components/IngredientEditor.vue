@@ -71,7 +71,7 @@
                     </button>
 
                     </div>
-                    <div v-if="hover != ''" style="color: red">
+                    <div v-if="hover" style="color: red">
                         {{hoverContent}}
                     </div>
                 </div>
