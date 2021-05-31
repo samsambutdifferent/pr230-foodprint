@@ -1,5 +1,8 @@
 <template>
     <div class="w-full"> 
+
+        <StepBox title="Step 2:" text="Enter each ingredients and its quantity to the list below:"/>
+
         <FullWInput nameProp="ingredientName" placeholderProp="name" :valueProp="mealName"
         v-on:valueChanged="mealNameUpdated"/>
         <div class="pt-2 pb-2 border-gray-300 bg-white h-auto px-5 pr-16">
@@ -88,6 +91,7 @@
 
 <script>
 import FullWInput from './FullWInput.vue'
+import StepBox from './StepBox.vue'
 import axios from 'axios'
 
 export default {
@@ -95,6 +99,7 @@ export default {
   inject: ["mealInject", "ingredientsInject", "customSearchInject"],
   components: {
       FullWInput,
+      StepBox
   },
   data() {
     return {

@@ -70,7 +70,7 @@ export default {
   inject: ['carbonValueInject'],  
   mixins: [roundTo2decPlaces, numberWithCommas],
   components: {
-      Equivalent
+      Equivalent,
   },
   mounted() {
     db.collection('equivalency_conversion_factors').onSnapshot((snapshotChange) => {

@@ -1,5 +1,14 @@
 <template>
         <div class="w-full">
+
+        <div class="text-gray-800 relative pb-10">
+          <p>
+          The most accurate way to find out how sustainable your meal is in 3 easy steps. Find out more about us here <a class="cursor-pointer bg-gray-200" @click="() => goToAboutPage()">About</a>
+          </p>
+
+          <StepBox title="Step 1:" text="Enter the name of your meal below:"/>
+        </div>
+
           <FullWInput
           nameProp="searchMeals" placeholderProp="Enter the name of your meal.." :valueProp="search"
           v-on:valueChanged="seachMeals"/>
@@ -25,11 +34,13 @@
 <script>
 import { db } from '../firebaseDB.js';
 import FullWInput from './FullWInput.vue'
+import StepBox from './StepBox.vue'
 
 export default {
   name: 'MealSearch',
   components: {
     FullWInput,
+    StepBox
   },
   mounted() {
     db.collection('meals').onSnapshot((snapshotChange) => {
@@ -79,6 +90,9 @@ export default {
     },
     changePage() {
       this.$emit('changePage', 'MealOutput') 
+    },
+    goToAboutPage(){
+      this.$emit('changePage', 'AboutPage') 
     },
     seachMeals(val) {
       this.search = val

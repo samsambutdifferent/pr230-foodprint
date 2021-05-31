@@ -1,22 +1,22 @@
 <template>
   <HeaderComponent></HeaderComponent>
     <div class="flex flex-col">
-    <div
-    class="cursor-pointer text-gray-400 my-5 pr-16 pl-16 lg:pr-32 lg:pl-32 relative">
-      <a v-if="currentComponentName != 'MealSearch'" @click="() => backPage()">back</a>
-    </div>
-    <div class="relative flex flex-col items-center my-40 md:my-60">
-      <transition name="slide-fade" mode="out-in">
-        <component
-        class="w-screen pr-16 pl-16 lg:pr-32 lg:pl-32 mr-8 ml-8 relative"
-        v-bind:is=currentComponentName
-        v-on:mealSelected=mealSelected
-        v-on:ingredientsSelected=ingredientsSelected
-        v-on:changePage=changePage
-        v-on:searchInput=searchInput
-        ></component>
-      </transition>
-    </div>
+      <div
+      class="cursor-pointer text-gray-400 my-5 pr-16 pl-16 lg:pr-32 lg:pl-32 relative">
+        <a v-if="currentComponentName != 'MealSearch'" @click="() => backPage()">back</a>
+      </div>
+      <div class="relative flex flex-col items-center my-40 md:my-60">
+        <transition name="slide-fade" mode="out-in">
+          <component
+          class="w-screen pr-16 pl-16 lg:pr-32 lg:pl-32 mr-8 ml-8 relative"
+          v-bind:is=currentComponentName
+          v-on:mealSelected=mealSelected
+          v-on:ingredientsSelected=ingredientsSelected
+          v-on:changePage=changePage
+          v-on:searchInput=searchInput
+          ></component>
+        </transition>
+      </div>
   </div>
 </template>
 
@@ -24,6 +24,7 @@
 import HeaderComponent from './components/HeaderComponent.vue'
 import MealSearch from './components/MealSearch.vue'
 import MealOutput from './components/MealOutput.vue'
+import AboutPage from './components/AboutPage.vue'
 import { computed } from "vue";
 
 export default {
@@ -31,7 +32,8 @@ export default {
   components: {
     HeaderComponent,
     MealSearch,
-    MealOutput
+    MealOutput,
+    AboutPage
   },
   data() {
     return {
