@@ -15,7 +15,8 @@
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vue": "^3.0.0",
-    "vue-spinner": "^1.0.4"
+    "vue-spinner": "^1.0.4",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.2",
