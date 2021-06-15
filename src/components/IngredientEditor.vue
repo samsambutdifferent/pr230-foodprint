@@ -190,6 +190,14 @@ export default {
 
         let param = this.ingredients.map(x => { return({'name': x.matched, 'weight': x.weight}) })
 
+        axios.post(process.env.VUE_APP_LOG_FOOD_ITEM,
+          `name=`+ this.mealName + `&ingredients=` + JSON.stringify(param))
+        .then((response) => {
+          console.log(response);
+        }, (error) => {
+          console.log(error);
+        });
+
         let val = await axios.post(process.env.VUE_APP_CARBON_CALCULATOR, param)
           .then(function (response) {
             return response.data;
