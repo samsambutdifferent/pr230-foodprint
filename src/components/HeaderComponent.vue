@@ -5,10 +5,10 @@
       <div class="flexf justify-start lg:w-0 flex-1">
         <img class="h-10 md:h-16 w-auto" src="../assets/frog-prints.png" alt="">
       </div>
-      <div class="pr-6 context-menu">
+      <div class="pr-6 pointer">
         <p  @click="() => routeTo('aboutPage')">about</p>
       </div>
-      <div class="text-2xl font-bold text-gray-800 md:text-3xl context-menu "
+      <div class="text-2xl font-bold text-gray-800 md:text-3xl pointer "
         @click="routeTo('MealSearch')">
           <p>foodprint</p>
       </div>
@@ -40,8 +40,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.context-menu {
-  cursor: context-menu;
+.pointer {
+  cursor: pointer;
 }
 
 </style>
