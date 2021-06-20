@@ -66,7 +66,6 @@
                     <div class="w-full p-2"
                     @mouseover="hover = true" @mouseleave="hover = false"  :class="{ active: hover }">
                     <button
-
                     @click="() => calculateCarbon()"
                     class="bg-purple-200 rounded disabled:opacity-50"
                     :disabled="awaitingSemanticMatch || !valueHasChanged" >
@@ -74,7 +73,7 @@
                     </button>
 
                     </div>
-                    <div v-if="hover" style="color: red">
+                    <div v-if="hover" style="color: red" id="error-content">
                         {{hoverContent}}
                     </div>
                 </div>
@@ -215,4 +214,8 @@ export default {
 </script>
 
 <style scoped>
+#error-content {
+  position: absolute;
+}
+
 </style>
