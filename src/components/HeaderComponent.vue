@@ -2,13 +2,13 @@
 <div class="relative bg-white">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
-      <div class="flexf justify-start lg:w-0 lg:flex-1">
+      <div class="flexf justify-start lg:w-0 flex-1">
         <img class="h-10 md:h-16 w-auto" src="../assets/frog-prints.png" alt="">
       </div>
-      <div>
+      <div class="pr-6 context-menu">
         <p  @click="() => routeTo('aboutPage')">about</p>
       </div>
-      <div class="text-2xl font-bold text-gray-800 md:text-3xl"
+      <div class="text-2xl font-bold text-gray-800 md:text-3xl context-menu "
         @click="routeTo('MealSearch')">
           <p>foodprint</p>
       </div>
@@ -40,4 +40,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.context-menu {
+  cursor: context-menu;
+}
+
 </style>
