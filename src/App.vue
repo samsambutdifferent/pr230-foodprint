@@ -1,5 +1,6 @@
 <template>
-  <HeaderComponent></HeaderComponent>
+  <HeaderComponent
+  v-on:changePage=changePage></HeaderComponent>
     <div class="flex flex-col">
       <div
       class="cursor-pointer text-gray-400 my-5 pr-16 pl-16 lg:pr-32 lg:pl-32 relative">
