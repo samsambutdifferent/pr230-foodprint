@@ -1,7 +1,7 @@
 <template>
         <div class="w-full">
             <div class="grid grid-cols-1 gap-4">
-                <div class="ml-20 mr-20 mb-10 bg-gray-200 p-2">
+                <div class="md:ml-20 md:mr-20 mb-10 bg-gray-200 p-2">
                     <h2><strong>Our Mission</strong></h2>
                     <br>
                     <p><strong>What is this CO2e?</strong></p>
@@ -25,7 +25,7 @@
                     <br>
                   
                 </div>
-                <div class="ml-20 mr-20 mb-10 bg-gray-200 p-2">
+                <div class="md:ml-20 md:mr-20 mb-10 bg-gray-200 p-2">
                     <h2><strong>How do we calculate CO2e?</strong></h2>
                     <br>
                     <p><strong>To reduce global food emmissions by making sustainable eating easy for everyone.</strong></p>
